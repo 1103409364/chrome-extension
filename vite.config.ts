@@ -6,7 +6,7 @@ import fs from "fs";
 import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
 import legacy from "@vitejs/plugin-legacy";
-import WindiCSS from 'vite-plugin-windicss';
+import WindiCSS from "vite-plugin-windicss";
 import eslintPlugin from "vite-plugin-eslint";
 
 const isProd = process.env.VITE_PROJECT_ENV === "prod";
@@ -32,7 +32,7 @@ const getEntry = () => {
         temp.toString().slice(0, index) +
         `<script type="module" src=".${entry}"></script>` +
         temp.toString().slice(index);
-      fs.writeFile(tempHtml, content, err => {
+      fs.writeFile(tempHtml, content, (err) => {
         if (err) console.log(err);
       });
     }
@@ -40,7 +40,7 @@ const getEntry = () => {
     list[name] = path.resolve(__dirname, tempHtml);
   });
   return list;
-}
+};
 
 const pageEntry = getEntry();
 
@@ -79,29 +79,29 @@ if (isProd) {
     viteImagemin({
       gifsicle: {
         optimizationLevel: 7,
-        interlaced: false
+        interlaced: false,
       },
       optipng: {
-        optimizationLevel: 7
+        optimizationLevel: 7,
       },
       mozjpeg: {
-        quality: 20
+        quality: 20,
       },
       pngquant: {
         quality: [0.8, 0.9],
-        speed: 4
+        speed: 4,
       },
       svgo: {
         plugins: [
           {
-            name: "removeViewBox"
+            name: "removeViewBox",
           },
           {
             name: "removeEmptyAttrs",
-            active: false
-          }
-        ]
-      }
+            active: false,
+          },
+        ],
+      },
     })
   );
 }
@@ -109,14 +109,14 @@ if (isProd) {
 export default defineConfig({
   server: {
     fs: {
-      strict: false
-    }
+      strict: false,
+    },
   },
   plugins,
   resolve: {
     alias: {
-      "@": path.join(__dirname, "./src")
-    }
+      "@": path.join(__dirname, "./src"),
+    },
   },
   build: {
     outDir: "dist",
@@ -124,7 +124,7 @@ export default defineConfig({
       input: pageEntry,
       output: {
         manualChunks(id) {
-          console.log('[id]', id)
+          console.log("[id]", id);
           if (id.includes("node_modules")) {
             return id
               .toString()
@@ -132,8 +132,8 @@ export default defineConfig({
               .split("/")[0]
               .toString();
           }
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 });

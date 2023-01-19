@@ -1,15 +1,7 @@
 <template>
-    <h1>rule</h1>
+  <h1>rule</h1>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-import 'virtual:windi.css'
-export default defineComponent({
-    data: () => ({ visible: false }),
-});
+<script lang="ts" setup>
+import "virtual:windi.css";
 </script>
-
-<style scoped>
-
-</style>

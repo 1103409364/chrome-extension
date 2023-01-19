@@ -1,5 +1,5 @@
-chrome.action.onClicked.addListener(tab => {
+chrome.action.onClicked.addListener((tab) => {
   if (tab.id) {
-      chrome.tabs.sendMessage(tab.id, { toggleVisible: true });
+    chrome.tabs.sendMessage(tab.id, { toggleVisible: true });
   }
 });
