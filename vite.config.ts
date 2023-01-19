@@ -7,6 +7,7 @@ import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
 import legacy from "@vitejs/plugin-legacy";
 import WindiCSS from 'vite-plugin-windicss';
+import eslintPlugin from "vite-plugin-eslint";
 
 const isProd = process.env.VITE_PROJECT_ENV === "prod";
 
@@ -44,7 +45,11 @@ const getEntry = () => {
 const pageEntry = getEntry();
 
 const plugins = [
-  vue(), WindiCSS(), 
+  vue(),
+  WindiCSS(),
+  eslintPlugin({
+    include: ["src/**/*.ts", "src/**/*.vue", "src/*.ts", "src/*.vue"],
+  }),
   // chromeExtension(),
   // viteCompression({
   //   ext: ".gz",
